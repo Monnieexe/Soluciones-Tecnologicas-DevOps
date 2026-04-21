@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Instalando dependencias..."
+  build:
+    commands:
+      - echo "Construyendo imagen Docker..."
+      - docker build -t fintech-app .
+  post_build:
+    commands:
+      - echo "Desplegando en EC2 vía AWS SSM..."
+      - aws ssm send-command --instance-ids "TU_INSTANCE_ID_AQUI" --document-name "AWS-RunShellScript" --parameters 'commands=["cd /home/ubuntu/Soluciones-Tecnologicas-DevOps && docker-compose up -d --build"]'
