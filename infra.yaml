@@ -1,0 +1,13 @@
+Resources:
+  MiBucketS3:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "fintech-storage-${AWS::AccountId}"
+
+  MiInstanciaEC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t3.micro
+      # IMPORTANTE: Verifica que esta AMI sea válida en tu región actual (us-east-1)
+      ImageId: ami-0c55b159cbfafe1f0 
+      IamInstanceProfile: LabInstanceProfile
